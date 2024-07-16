@@ -9,7 +9,38 @@ import Human from "../../assets/icon/Human";
 import StateIcon from "../../assets/icon/State";
 
 function MainPage() {
-  const onClickData = () => {
+  const [responseData, setResponseData] = useState();
+
+  useEffect(() => {
+    onList();
+  },[]);
+
+  useEffect(() => {
+    console.log(responseData);
+  }, [responseData]);
+
+  const onList = async () => {
+    const API_BASE_URL = process.env.REACT_APP_API_KEY;
+    const token = sessionStorage.getItem("accessToken");
+
+    axios
+      .post(`${API_BASE_URL}/report_list`, {}, {headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        setResponseData(res.data);
+      })
+      .catch((err) => {
+        console.log(err.data);
+        alert("에러가 발생했습니다.");
+    });
+  }
+
+  const onClickData = (id) => {
+    console.log(id);
+    localStorage.setItem("id", id);
     window.location.assign("/data");
   }
 
@@ -30,19 +61,24 @@ function MainPage() {
             </TextBottom>
           </UserContainer>
           <DataContainer>
-            <DataColumn onClick={() => onClickData()}>
-              <Title>제목</Title>
+          {responseData && responseData.map((item) => (
+            <DataColumn onClick={() => onClickData(item.report_id)}>
+              <Title>{item.title}</Title>
               <DataDiv>
                 <TagDiv>
                   <Human />
-                  <Tag>이름</Tag>
+                  <Tag>{item.name}</Tag>
                 </TagDiv>
                 <TagDiv>
                   <StateIcon />
-                  <State>대기</State>
+                  <State>{item.is_accepted=="YES" ? "승인" : "대기"}</State>
+                </TagDiv>
+                <TagDiv>
+                  <Tag>{item.hosu}</Tag>
                 </TagDiv>
               </DataDiv>
             </DataColumn>
+              ))}
           </DataContainer>
         </Box>
       </Container>
