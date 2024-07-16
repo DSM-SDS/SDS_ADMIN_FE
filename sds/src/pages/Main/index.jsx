@@ -68,7 +68,7 @@ const UserContainer = styled.div`
   height: 140px;
   background-color: ${color.White};
   border-radius: 15px;
-  padding: 20px;
+  padding: 20px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
