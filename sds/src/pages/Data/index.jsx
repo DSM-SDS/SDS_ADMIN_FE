@@ -3,7 +3,7 @@ import axios from "axios";
 import { styled } from "styled-components";
 import { color } from "../../styles/theme";
 
-import Header from "../../components/Header";
+import MainHeader from "../../components/MainHeader";
 import Back from "../../assets/icon/Back";
 import Human from "../../assets/icon/Human";
 import Calender from "../../assets/icon/Calender";
@@ -15,7 +15,7 @@ function DataPage() {
 
   return (
     <>
-      <Header />
+      <MainHeader />
       <Container>
         <Box>
           <BackButton onClick={() => onClickBack()}>
