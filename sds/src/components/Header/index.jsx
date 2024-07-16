@@ -6,12 +6,21 @@ import { color } from "../../styles/theme";
 import Logo from "../../assets/icon/Logo";
 
 function Header() {
+  const onClickSignup = () => {
+    window.location.assign("/signup");
+  }
+
+  const onClickLogin = () => {
+    window.location.assign("/");
+  }
 
   return (
     <Container>
-      <LogoStyle>
-        <Logo />
-      </LogoStyle>
+      <Logo />
+      <ButtonDiv>
+        <Button onClick={() => onClickLogin()}>로그인</Button>
+        <Button onClick={() => onClickSignup()}>회원가입</Button>
+      </ButtonDiv>
     </Container>
   );
 }
@@ -22,12 +31,27 @@ const Container = styled.div`
   background-color: ${color.White};
   display: flex;
   align-items: center;
+  justify-content: space-around;
 `;
 
-const LogoStyle = styled.div`
-  margin-left: 350px;
-  display: flex;
+const Button = styled.button`
+  width: 100px;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: ${color.White};
+  font-size: 16px;
+  font-weight: 500;
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 
+const ButtonDiv = styled.div`
+  width: 220px;
+  height: 60px;
+`
 
 export default Header;
