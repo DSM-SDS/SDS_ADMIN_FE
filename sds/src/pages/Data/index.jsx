@@ -8,9 +8,59 @@ import Back from "../../assets/icon/Back";
 import Human from "../../assets/icon/Human";
 import Calender from "../../assets/icon/Calender";
 
+import onAccept from "../../utils/Accept";
+
 function DataPage() {
+  const [viewData, setViewData] = useState();
+
+  const [acceptData, setAcceptData] = useState({
+    id: "",
+    state: ""
+  })
+
+  useEffect(() => {
+    const data = localStorage.getItem("id");
+    onView(data);
+    setAcceptData({
+      ...acceptData,
+      id: data,
+    });
+  }, []);
+
+  const onView = async ( data ) => {
+    const API_BASE_URL = process.env.REACT_APP_API_KEY;
+    const token = sessionStorage.getItem("accessToken");
+    console.log(data);
+
+    axios
+      .post(`${API_BASE_URL}/report_view`, {
+        report_id: data
+      }, {headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        setViewData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("에러가 발생했습니다.");
+    });
+}
+
   const onClickBack = () => {
     window.location.assign("/main");
+  }
+
+  const onClickButton = (e) => {
+      const { name } = e.target;
+      setAcceptData({
+      ...acceptData,
+      state: name,
+    });
+
+    onAccept(acceptData);
   }
 
   return (
@@ -22,30 +72,34 @@ function DataPage() {
             <Back />
             <Text>돌아가기</Text>
           </BackButton>
+          {viewData ?
           <Div>
-            <Title>제목</Title>
+            <Title>{viewData.title}</Title>
             <Title>
               <TagDiv>
                 <Human />
-                <Tag>이름</Tag>
+                <Tag>{viewData.name}</Tag>
               </TagDiv>
               <TagDiv>
                 <Calender />
-                <Tag>0000-00-00</Tag>
+                <Tag>{viewData.date}</Tag>
               </TagDiv>
             </Title>
             <Story>
-            아니 201호 너무 시끄러운거 같은데요;;<br/>혹시 밤에 운동하시나요....<br/>제발 12시 넘어서는 뛰지맙시다.<br/>혼자 사는 곳 아니잖아요.<br/>서로 배려하면서 삽니다.
+            {viewData.detail}
             </Story>
             <Grape>
-              <Text>00:00 ~ 00:00 데이터 기록</Text>
+              <Text>{viewData.time} 데이터 기록</Text>
               <GrapeDiv></GrapeDiv>
             </Grape>
             <ButtonDiv>
-              <ButtonOK>승인하기</ButtonOK>
-              <ButtonNo>취소하기</ButtonNo>
+              <ButtonOK name="YES" onClick={onClickButton}>승인하기</ButtonOK>
+              <ButtonNo name="NO" onClick={onClickButton}>취소하기</ButtonNo>
             </ButtonDiv>
           </Div>
+          :
+          <Div></Div>
+          }
         </Box>
       </Container>
     </>
@@ -115,13 +169,16 @@ const Tag = styled.div`
   color: ${color.Gray[2]};
 `
 
-const Story = styled.div`
+const Story = styled.pre`
   width: 940px;
   height: 450px;
   font-size: 14px;
   font-weight: 600;
   color: ${color.Black};
   margin-top: 40px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: "auto",
 `
 
 const Grape = styled.div`
