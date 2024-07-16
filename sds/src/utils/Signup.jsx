@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const onSignup = async ( data ) => {
     const API_BASE_URL = process.env.REACT_APP_API_KEY;
-    console.log(data);
 
     axios
       .post(`${API_BASE_URL}/signin`, {

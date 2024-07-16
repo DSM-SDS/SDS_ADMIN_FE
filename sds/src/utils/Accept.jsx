@@ -3,7 +3,6 @@ import axios from 'axios';
 const onView = async ( data ) => {
     const API_BASE_URL = process.env.REACT_APP_API_KEY;
     const token = sessionStorage.getItem("accessToken");
-    console.log(data);
 
     axios
       .post(`${API_BASE_URL}/accept_report`, {
@@ -15,6 +14,7 @@ const onView = async ( data ) => {
     })
       .then((res) => {
         alert(`승인되었습니다.`);
+        window.location.assign('/main');
       })
       .catch((err) => {
         console.log(err);

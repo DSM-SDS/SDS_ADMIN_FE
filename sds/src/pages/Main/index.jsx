@@ -10,9 +10,11 @@ import StateIcon from "../../assets/icon/State";
 
 function MainPage() {
   const [responseData, setResponseData] = useState();
+  const [name, setName] = useState();
 
   useEffect(() => {
     onList();
+    setName(localStorage.getItem("username"));
   },[]);
 
   useEffect(() => {
@@ -53,12 +55,8 @@ function MainPage() {
             <Label>MY PAGE</Label>
             <TextDiv>
               <Profile></Profile>
-              <Text>admin</Text>
+              <Text>{name}</Text>
             </TextDiv>
-            <TextBottom>
-              <Text>소속</Text>
-              <TextGray>00 아파트</TextGray>
-            </TextBottom>
           </UserContainer>
           <DataContainer>
           {responseData && responseData.map((item) => (
@@ -74,7 +72,7 @@ function MainPage() {
                   <State>{item.is_accepted=="YES" ? "승인" : "대기"}</State>
                 </TagDiv>
                 <TagDiv>
-                  <Tag>{item.hosu}</Tag>
+                  <Tag>{item.hosu}호</Tag>
                 </TagDiv>
               </DataDiv>
             </DataColumn>
@@ -104,7 +102,7 @@ const Box = styled.div`
 
 const UserContainer = styled.div`
   width: 240px;
-  height: 140px;
+  height: 100px;
   background-color: ${color.White};
   border-radius: 15px;
   padding: 20px 40px;
@@ -135,26 +133,12 @@ const Text = styled.div`
   color: ${color.Black};
 `;
 
-const TextGray = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-  color: ${color.Gray[2]};
-`;
-
 const TextDiv = styled.div`
   width: 240px;
   height: 60px;
   display: flex;
   align-items: center;
   gap: 50px;
-  border-bottom: solid 1px ${color.Gray[1]};
-`;
-
-const TextBottom = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 50px;
-  margin-left: 10px;
 `;
 
 const DataColumn = styled.div`
@@ -168,12 +152,14 @@ const Title = styled.div`
   font-weight: bold;
   color: ${color.Black};
   margin-bottom: 20px;
+  -webkit-user-select: none;
 `;
 
 const Tag = styled.div`
   font-size: 14px;
   font-weight: 600;
   color: ${color.Gray[2]};
+  -webkit-user-select: none;
 `;
 
 const State = styled.div`

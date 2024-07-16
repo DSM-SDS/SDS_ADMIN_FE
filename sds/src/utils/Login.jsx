@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const onLogin = async ( data ) => {
     const API_BASE_URL = process.env.REACT_APP_API_KEY;
-    console.log(data);
 
     axios
       .post(`${API_BASE_URL}/login`, {
@@ -13,6 +12,7 @@ const onLogin = async ( data ) => {
         const { accessToken, refreshToken } = res.data;
         sessionStorage.setItem("accessToken", accessToken);
         sessionStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("username", data.username);
         alert(`로그인에 성공하였습니다.`);
         window.location.assign("/main");
       })
