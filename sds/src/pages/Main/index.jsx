@@ -3,7 +3,7 @@ import axios from "axios";
 import { styled } from "styled-components";
 import { color } from "../../styles/theme";
 
-import Header from "../../components/Header";
+import MainHeader from "../../components/MainHeader";
 import Profile from "../../assets/icon/Profile";
 import Human from "../../assets/icon/Human";
 import StateIcon from "../../assets/icon/State";
@@ -15,7 +15,7 @@ function MainPage() {
 
   return (
     <>
-      <Header />
+      <MainHeader />
       <Container>
         <Box>
           <UserContainer>
