@@ -9,13 +9,16 @@ import Human from "../../assets/icon/Human";
 import Calender from "../../assets/icon/Calender";
 
 function DataPage() {
+  const onClickBack = () => {
+    window.location.assign("/main");
+  }
 
   return (
     <>
       <Header />
       <Container>
         <Box>
-          <BackButton>
+          <BackButton onClick={() => onClickBack()}>
             <Back />
             <Text>돌아가기</Text>
           </BackButton>

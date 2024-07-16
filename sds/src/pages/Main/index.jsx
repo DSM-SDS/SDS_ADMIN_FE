@@ -9,6 +9,9 @@ import Human from "../../assets/icon/Human";
 import StateIcon from "../../assets/icon/State";
 
 function MainPage() {
+  const onClickData = () => {
+    window.location.assign("/data");
+  }
 
   return (
     <>
@@ -27,7 +30,7 @@ function MainPage() {
             </TextBottom>
           </UserContainer>
           <DataContainer>
-            <DataColumn>
+            <DataColumn onClick={() => onClickData()}>
               <Title>제목</Title>
               <DataDiv>
                 <TagDiv>
