@@ -6,9 +6,33 @@ import { color } from "../../styles/theme";
 import Header from "../../components/Header";
 
 function SignupPage() {
+  const [signupInputData, setSignupInputData] = useState({
+    username: "",
+    password: "",
+    passwordCheck: "",
+    name: "",
+    apt_name: ""
+  });
+
+  const [signupData, setSignupData] = useState({
+    username: "",
+    password: "",
+    name: "",
+    apt_name: "",
+    role: "Admin"
+  });
+
   const onClickSignup = () => {
     window.location.assign("/");
   }
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setSignupInputData({
+      ...signupInputData,
+      [name]: value,
+    });
+  };
 
   return (
     <>
@@ -16,11 +40,11 @@ function SignupPage() {
       <Container>
         <Text>Signup</Text>
         <InputDiv>
-          <Input className="pw" type="text" placeholder="이름" />
-          <Input className="id" type="text" placeholder="아이디" />
-          <Input className="pw" type="password" placeholder="비밀번호" />
-          <Input className="pw" type="password" placeholder="비밀번호 확인" />
-          <Input className="pw" type="text" placeholder="아파트 이름" />
+          <Input name="name" type="text" placeholder="이름" onChange={onChange}/>
+          <Input name="username" type="text" placeholder="아이디" onChange={onChange}/>
+          <Input name="password" type="password" placeholder="비밀번호" onChange={onChange}/>
+          <Input name="passwordCheck" type="password" placeholder="비밀번호 확인" onChange={onChange}/>
+          <Input name="apt_name" type="text" placeholder="아파트 이름 (공백없이 입력해주세요)" onChange={onChange}/>
         </InputDiv>
         <Button onClick={() => onClickSignup()}>회원가입</Button>
       </Container>
