@@ -4,16 +4,13 @@ import { styled } from "styled-components";
 import { color } from "../../styles/theme";
 
 import Header from "../../components/Header";
+import onLogin from "../../utils/Login";
 
 function LoginPage() {
   const [loginData, setLoginData] = useState({
     username: "",
     password: ""
 });
-
-  const onClickLogin = () => {
-    window.location.assign("/main");
-  }
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +29,7 @@ function LoginPage() {
           <Input type="text" placeholder="아이디" name="username" onChange={onChange}/>
           <Input type="password" placeholder="비밀번호" name="password" onChange={onChange} />
         </InputDiv>
-        <Button onClick={() => onClickLogin()}>로그인</Button>
+        <Button onClick={() => onLogin(loginData)}>로그인</Button>
       </Container>
     </>
   );
