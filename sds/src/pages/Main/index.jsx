@@ -86,7 +86,7 @@ function MainPage() {
 
 const Container = styled.div`
 	width: 100%;
-	height: 94vh;
+  padding: 50px 0px;
   background-color: ${color.Gray[0]};
   display: flex;
   align-items: flex-end;
@@ -114,12 +114,13 @@ const UserContainer = styled.div`
 
 const DataContainer = styled.div`
   width: 820px;
-  height: 750px;
   background-color: ${color.White};
-  border-radius: 15px 15px 0px 0px;
+  border-radius: 15px;
   display: flex;
-  justify-content: center;
-  padding-top: 45px;
+  flex-direction: column;
+  align-items: center;
+  padding: 45px 0px;
+  row-gap: 10px;
 `;
 
 const Label = styled.div`

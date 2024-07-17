@@ -7,6 +7,7 @@ import MainHeader from "../../components/MainHeader";
 import Back from "../../assets/icon/Back";
 import Human from "../../assets/icon/Human";
 import Calender from "../../assets/icon/Calender";
+import Chart from "./LineChart";
 
 import onAccept from "../../utils/Accept";
 
@@ -89,8 +90,10 @@ function DataPage() {
             {viewData.detail}
             </Story>
             <Grape>
-              <Text>{viewData.time} 데이터 기록</Text>
-              <GrapeDiv></GrapeDiv>
+              <Text>데이터 기록</Text>
+              <GrapeDiv>
+                <Chart data={viewData.sensor_data}></Chart>
+              </GrapeDiv>
             </Grape>
             <ButtonDiv>
               <ButtonOK name="YES" onClick={onClickButton}>승인하기</ButtonOK>
