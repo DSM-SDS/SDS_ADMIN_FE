@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 import useLine from './useLine';
@@ -6,6 +6,7 @@ import { color } from "../../../styles/theme";
 
 const LineChart = ({ points, data }) => {
     const [lines] = useLine(points);
+    const [result, setResult] = useState();
 
     return (
         <Box>
@@ -14,7 +15,7 @@ const LineChart = ({ points, data }) => {
                     <GraphLine x1={x1} x2={x2} y1={y1} y2={y2} stroke={color.Red[2]} strokeWidth="1" />
                 ))}
                 {points.map(({ x, y }, index) => {
-                    const time = data[index].time.substring(11, 18);
+                    const time = data[index].time.substring(11, 16);
                     return(
                     <>
                         <GraphCircle cx={x} cy={y} r="1"></GraphCircle>
@@ -53,7 +54,7 @@ const GraphCircle = styled.circle`
 `;
 
 const Text = styled.text`
-  font-size: 5px;
+  font-size: 8px;
   color: ${color.Black};
 `;
 

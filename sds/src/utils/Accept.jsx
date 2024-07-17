@@ -1,13 +1,15 @@
 import axios from 'axios';
 
-const onView = async ( data ) => {
+const onAccept = async ( state ) => {
     const API_BASE_URL = process.env.REACT_APP_API_KEY;
     const token = sessionStorage.getItem("accessToken");
+    const data = localStorage.getItem("id");
+    console.log(data);
 
     axios
       .post(`${API_BASE_URL}/accept_report`, {
-        report_id: data.id,
-        is_accepted: data.state
+        report_id: data,
+        is_accepted: state ? "YES" : "NO"
       }, {headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -22,4 +24,4 @@ const onView = async ( data ) => {
     });
 }
 
-export default onView;
+export default onAccept;

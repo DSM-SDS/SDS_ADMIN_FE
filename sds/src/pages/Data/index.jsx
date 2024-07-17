@@ -22,16 +22,11 @@ function DataPage() {
   useEffect(() => {
     const data = localStorage.getItem("id");
     onView(data);
-    setAcceptData({
-      ...acceptData,
-      id: data,
-    });
   }, []);
 
   const onView = async ( data ) => {
     const API_BASE_URL = process.env.REACT_APP_API_KEY;
     const token = sessionStorage.getItem("accessToken");
-    console.log(data);
 
     axios
       .post(`${API_BASE_URL}/report_view`, {
@@ -52,16 +47,6 @@ function DataPage() {
 
   const onClickBack = () => {
     window.location.assign("/main");
-  }
-
-  const onClickButton = (e) => {
-      const { name } = e.target;
-      setAcceptData({
-      ...acceptData,
-      state: name,
-    });
-
-    onAccept(acceptData);
   }
 
   return (
@@ -96,8 +81,8 @@ function DataPage() {
               </GrapeDiv>
             </Grape>
             <ButtonDiv>
-              <ButtonOK name="YES" onClick={onClickButton}>승인하기</ButtonOK>
-              <ButtonNo name="NO" onClick={onClickButton}>취소하기</ButtonNo>
+              <ButtonOK onClick={() => onAccept(true)} >승인하기</ButtonOK>
+              <ButtonNo onClick={() => onAccept(false)} >취소하기</ButtonNo>
             </ButtonDiv>
           </Div>
           :
